@@ -13,4 +13,3 @@ sudoku_collections = [[["2", " ", " ", " ", "4", " ", " ", "9", " "],
 length = len(sudoku_collections)
 picked_board = sudoku_collections[0]
 random.shuffle(picked_board)
-
