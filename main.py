@@ -43,19 +43,21 @@ def solve(board, number):
 
     for cha in number:
         if valid(board, cha, row, col):
-            widgets[row][col].config(background="#D1F2EB")
+            widgets[row][col].config(background="#F7DC6F")
             widgets[row][col].config(fg="#1B4F72")
             string_vars[row][col].set(cha)
-            sleep(0.0001)
+            master.update()
+            sleep(0.001)
             board[row][col] = cha
 
             if solve(board, number):
                 return True
 
-            widgets[row][col].config(background="#D1F2EB")
+            widgets[row][col].config(background="#F7DC6F")
             widgets[row][col].config(fg="#1B4F72")
             string_vars[row][col].set(" ")
-            sleep(0.0001)
+            sleep(0.001)
+            master.update()
             board[row][col] = " "
 
     return False
