@@ -3,12 +3,13 @@ import tkinter
 from SampleSudokus import picked_board
 from time import sleep
 
+
 temp_board = picked_board[::]
 master = tkinter.Tk()
 master.title("SudokuSolver")
 master.geometry("603x500+500+170")
 Frame = tkinter.Frame(master, background="#138D75")
-widgets = SudokuFrames.create_board(Frame)
+widgets, string_vars = SudokuFrames.create_board(Frame)
 solve_btn = tkinter.PhotoImage(file="btn.png")
 Button = tkinter.Button(Frame, image=solve_btn, command=lambda: solve(temp_board, numbers))
 Button.grid(row=9, column=0, columnspan=9, sticky='ew')
@@ -42,9 +43,10 @@ def solve(board, number):
 
     for cha in number:
         if valid(board, cha, row, col):
-            widgets[row][col].config(text=cha)
             widgets[row][col].config(background="#D1F2EB")
             widgets[row][col].config(fg="#1B4F72")
+            string_vars[row][col].set(cha)
+            sleep(0.0001)
             board[row][col] = cha
 
             if solve(board, number):
@@ -52,7 +54,8 @@ def solve(board, number):
 
             widgets[row][col].config(background="#D1F2EB")
             widgets[row][col].config(fg="#1B4F72")
-            widgets[row][col].config(text=" ")
+            string_vars[row][col].set(" ")
+            sleep(0.0001)
             board[row][col] = " "
 
     return False
